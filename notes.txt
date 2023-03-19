@@ -1,0 +1,4 @@
+1) create laravel
+2) create tables
+3) Add layouts
+4) Add Routes

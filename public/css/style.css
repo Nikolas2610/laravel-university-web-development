@@ -1,0 +1,64 @@
+.rounded-xxl {
+    border-radius: 50px;
+}
+
+.bg-light-gray {
+    background-color: #b5b9ba;
+}
+
+.bg-dark-gray {
+    background-color: #525657;
+}
+
+.text-decoration-blue {
+    text-decoration-color: blue;
+}
+
+.whitespace-nowrap {
+    white-space: nowrap;
+}
+
+.announcements {
+    max-height: 740px;
+    overflow-y: scroll;
+}
+
+#burger:focus {
+    box-shadow: none;
+}
+
+#mobile-logo{
+    font-size: 24px;
+    text-decoration:none;
+    color: #fff;
+}
+
+.active {
+    color: black !important;
+}
+
+/* Table scrollable */
+
+.tableFixHead {
+    margin-top: 2rem;
+    overflow-y: auto; /* make the table scrollable if height is more than 200 px  */
+    height: 400px; /* gives an initial height of 200px to the table */
+}
+.tableFixHead thead th {
+    position: sticky; /* make the table heads sticky */
+    top: 0px; /* table head will be placed from the top of the table and sticks to it */
+}
+table {
+    border-collapse: collapse; /* make the table borders collapse to each other */
+    width: 100%;
+}
+th,
+td {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+}
+th {
+    background: #eee;
+}
+
+/* End table scrollable */
