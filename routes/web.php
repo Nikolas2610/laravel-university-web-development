@@ -37,3 +37,5 @@ Route::post('/login', [AuthController::class, 'loginUser'])->name('loginUser');
 Route::post('/announcements', [AnnouncementController::class, 'importAnnouncement'])->name('announcementImport');
 Route::delete('/announcements', [AnnouncementController::class, 'destroy'])->name('announcements.destroy');
 Route::post('/import', [OfferController::class, 'importOffer'])->name('import.offer');
+
+//2014_10_12_000000

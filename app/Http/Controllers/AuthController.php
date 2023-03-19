@@ -84,18 +84,16 @@ class AuthController extends Controller
                 'admin' => $user->admin
             ]);
 //          Redirect to home page with success message
-            return view('home', [
+            return redirect()->route('home')->with([
                 'type' => 'success',
-                'message' => 'Η είσοδος σας ήταν επιτυχείς!'
+                'message' => 'Η ανακοίνωση έχει καταχωρηθεί επιτυχώς!'
             ]);
-//            return redirect()->route('home')->with('user', $user);
         } else {
             // Login failed, show error message
             return view('login', [
                 'type' => 'danger',
                 'message' => 'Λάθος στοιχεία εισόδου!'
             ]);
-//            return redirect()->back()->with('error', 'Invalid username or password');
         }
     }
 
@@ -116,6 +114,4 @@ class AuthController extends Controller
         }
 
     }
-
-//    what is best approch to my laravel web api. to have protected routes to check if the user is login. And how i have to save the user after the login to check if the user is login
 }

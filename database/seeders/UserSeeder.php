@@ -20,19 +20,19 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $counties = County::getallCountiesArray();
-        $municipalities = Municipality::getAllMunicipalitiesArray();
-        $fuels = Fuel::getAllFuelsArray();
+        $counties = County::all();
+        $municipalities = Municipality::all();
+        $fuels = Fuel::all();
 
         User::create([
             'name' => 'Admin',
             'email' => 'admin@plh23.com',
             'password' => 'Psyllou-23',
             'address' => 'Παγκράτι',
-            'municipality' => 'Κηφισιάς',
-            'county' => 'Δράμας',
+            'municipality' => $municipalities->random()->id,
+            'county' => $counties->random()->id,
             'username' => 'admin',
-            'fuel' => $fuels[0],
+            'fuel' => $fuels->random()->id,
             'afm' => 111111111,
             'admin' => true
         ]);
@@ -42,10 +42,10 @@ class UserSeeder extends Seeder
             'email' => 'user@plh23.com',
             'password' => 'Psyllou-23',
             'address' => 'Παγκράτι',
-            'municipality' => 'Κηφισιάς',
-            'county' => 'Δράμας',
+            'municipality' => $municipalities->random()->id,
+            'county' => $counties->random()->id,
             'username' => 'user',
-            'fuel' => $fuels[0],
+            'fuel' => $fuels->random()->id,
             'afm' => 111111112,
             'admin' => false
         ]);
@@ -58,10 +58,10 @@ class UserSeeder extends Seeder
                 'email' => $faker->unique()->safeEmail,
                 'password' => Hash::make(Str::random(10)),
                 'address' => $faker->address,
-                'municipality' => $municipalities[rand(0, sizeof($municipalities) - 1)],
-                'county' => $counties[rand(0, sizeof($counties) - 1)],
+                'municipality' => $municipalities->random()->id,
+                'county' => $counties->random()->id,
                 'username' => $faker->userName,
-                'fuel' => $fuels[rand(0, sizeof($fuels) - 1)],
+                'fuel' => $fuels->random()->id,
                 'afm' => $faker->unique()->randomNumber(9),
                 'admin' => false
             ]);
