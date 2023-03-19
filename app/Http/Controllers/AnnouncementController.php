@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class AnnouncementController extends Controller
 {
-    public function anouncementPage()
+    public function announcementPage(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
 //      Get the announcements order by the created_at field
         $announcements = Announcements::orderByDesc('created_at')->get();
@@ -37,7 +37,7 @@ class AnnouncementController extends Controller
         ]);
     }
 
-    public function importAnnouncement(AnnouncementRequest $request)
+    public function importAnnouncement(AnnouncementRequest $request): \Illuminate\Http\RedirectResponse
     {
         // Validate the data
         $validated = $request->validated();

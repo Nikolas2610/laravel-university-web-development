@@ -3,7 +3,6 @@
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MunicipalityController;
 use App\Http\Controllers\OfferController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,23 +18,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Web Pages
-
 Route::get('/', [HomeController::class, 'homePage'])->name('home');
-
-
-Route::get('/announcements', [AnnouncementController::class, 'anouncementPage'])->name('announcements');
-Route::get('/import', [OfferController::class, 'importPage'])->name('import');
-
+Route::get('/search', [OfferController::class, 'searchPage'])->name('search');
+Route::get('/announcements', [AnnouncementController::class, 'announcementPage'])->name('announcements');
 Route::get('/login', [AuthController::class, 'loginPage'])->name('login');
 Route::get('/register', [AuthController::class, 'registerPage'])->name('register');
-
-Route::get('/search', [OfferController::class, 'searchPage'])->name('search');
 
 // Actions
 Route::post('/register', [AuthController::class, 'createUser'])->name('createUser');
 Route::post('/login', [AuthController::class, 'loginUser'])->name('loginUser');
 Route::post('/announcements', [AnnouncementController::class, 'importAnnouncement'])->name('announcementImport');
 Route::delete('/announcements', [AnnouncementController::class, 'destroy'])->name('announcements.destroy');
-Route::post('/import', [OfferController::class, 'importOffer'])->name('import.offer');
 
-//2014_10_12_000000
+// Protected routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/import', [OfferController::class, 'importPage'])->name('import');
+    Route::post('/import', [OfferController::class, 'importOffer'])->name('import.offer');
+});

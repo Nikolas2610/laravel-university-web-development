@@ -37,7 +37,9 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 m-auto">
                 <x-nav-link route="home">Αρχική</x-nav-link>
                 <x-nav-link route="search">Αναζήτηση</x-nav-link>
-                <x-nav-link route="import">Καταχώρηση</x-nav-link>
+                @if(\App\Models\User::isUserLog())
+                    <x-nav-link route="import">Καταχώρηση</x-nav-link>
+                @endif
                 <x-nav-link route="announcements">Ανακοινώσεις</x-nav-link>
             </ul>
         </div>
@@ -45,8 +47,13 @@
         <!-- Right Element -->
         <div class="collapse navbar-collapse">
             <div class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <a href="{{ route('login') }}"
-                   class="btn btn-secondary rounded-xxl px-4 border border-dark border-2 bg-dark-gray">Login</a>
+                @if(\App\Models\User::$isUserLog)
+                    <a href="{{ route('logout') }}"
+                       class="btn btn-secondary rounded-xxl px-4 border border-dark border-2 bg-dark-gray">Logout</a>
+                @else
+                    <a href="{{ route('login') }}"
+                       class="btn btn-secondary rounded-xxl px-4 border border-dark border-2 bg-dark-gray">Login</a>
+                @endif
             </div>
         </div>
         <!-- End Right Element -->

@@ -4,14 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRequest;
-use App\Http\Resources\CountyResource;
-use App\Http\Resources\FuelResource;
-use App\Http\Resources\MunicipalityResource;
 use App\Models\County;
 use App\Models\Fuel;
 use App\Models\Municipality;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -112,6 +108,18 @@ class AuthController extends Controller
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
+    }
 
+    public function logout()
+    {
+//      Remove session variables
+        session()->forget('user_id');
+        session()->forget('username');
+        session()->forget('admin');
+        //  Redirect to home page with success message
+        return redirect()->route('home')->with([
+            'type' => 'success',
+            'message' => 'Η αποσύνδεση έχει πραγματοποιήθει επιτυχώς!'
+        ]);
     }
 }
