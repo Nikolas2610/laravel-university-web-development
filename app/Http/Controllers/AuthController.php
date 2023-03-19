@@ -4,14 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRequest;
-use App\Http\Resources\CountyResource;
-use App\Http\Resources\FuelResource;
-use App\Http\Resources\MunicipalityResource;
 use App\Models\County;
 use App\Models\Fuel;
 use App\Models\Municipality;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -84,18 +80,16 @@ class AuthController extends Controller
                 'admin' => $user->admin
             ]);
 //          Redirect to home page with success message
-            return view('home', [
+            return redirect()->route('home')->with([
                 'type' => 'success',
-                'message' => 'Η είσοδος σας ήταν επιτυχείς!'
+                'message' => 'Η ανακοίνωση έχει καταχωρηθεί επιτυχώς!'
             ]);
-//            return redirect()->route('home')->with('user', $user);
         } else {
             // Login failed, show error message
             return view('login', [
                 'type' => 'danger',
                 'message' => 'Λάθος στοιχεία εισόδου!'
             ]);
-//            return redirect()->back()->with('error', 'Invalid username or password');
         }
     }
 
@@ -114,8 +108,18 @@ class AuthController extends Controller
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
-
     }
 
-//    what is best approch to my laravel web api. to have protected routes to check if the user is login. And how i have to save the user after the login to check if the user is login
+    public function logout()
+    {
+//      Remove session variables
+        session()->forget('user_id');
+        session()->forget('username');
+        session()->forget('admin');
+        //  Redirect to home page with success message
+        return redirect()->route('home')->with([
+            'type' => 'success',
+            'message' => 'Η αποσύνδεση έχει πραγματοποιήθει επιτυχώς!'
+        ]);
+    }
 }
