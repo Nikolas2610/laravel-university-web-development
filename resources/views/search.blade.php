@@ -69,24 +69,6 @@
                 </table>
             </div>
         @endif
-        <!-- Table -->
-
-
-        <!-- Subnote -->
-        <div class="row mt-5">
-            <div class="col">
-                <p class="text-danger">
-                    (Σημ¨Η στήλη της "Διεύθυνσης" θα εμφανίζεται η διεύθυνση της επιχείρησης η οποία θα είναι και
-                    υπερσύνδεσμος που θα οδηγεί στο νέο tab στο Google maps βλ.
-                    <span>
-                        <a class="text-danger" target="_blank"
-                           href="http://developers.google.com/maps/documentation/urls/get-started#search-action">
-                            http://developers.google.com/maps/documentation/urls/get-started#search-action
-                        </a>
-                    </span>
-                    )
-                </p>
-            </div>
-        </div>
+        <!-- END Table -->
     </div>
 @endsection
