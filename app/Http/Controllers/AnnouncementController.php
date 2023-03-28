@@ -44,8 +44,8 @@ class AnnouncementController extends Controller
 
         // If everything is good it will continue to save the announcement otherwise return the errors to the page
         Announcements::create([
-            'title'=> $validated['title'],
-            'content'=> $validated['content'],
+            'title' => $validated['title'],
+            'content' => $validated['content'],
         ]);
 
         //  Return success response
@@ -57,25 +57,32 @@ class AnnouncementController extends Controller
 
     public function destroy(Request $request): \Illuminate\Http\RedirectResponse
     {
-        // Get the announcement id from the request
-        $announcementId = $request->input('announcement_id');
+        try {
+            // Παίρνουμε το id από το request
+            $announcementId = $request->input('announcement_id');
 
-        // Delete the announcement with the given id
-        Announcements::where('id', $announcementId)->delete();
+            // Διαγράφουμε την ανακοίνωση
+            Announcements::where('id', $announcementId)->delete();
 
-        // Redirect to the announcements index page
-        return redirect()->route('announcements')->with([
-            'type' => 'success',
-            'message' => 'Η ανακοίνωση έχει διαγραφή επιτυχώς!'
-        ]);
+            // Μεταφέρουμε τον χρήστη πίσω στη σελίδα με μήνυμα επιβεβαίωσης
+            return redirect()->route('announcements')->with([
+                'type' => 'success',
+                'message' => 'Η ανακοίνωση έχει διαγραφή επιτυχώς!'
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->route('announcements')->with([
+                'type' => 'danger',
+                'message' => 'Παρουσιάστηκε πρόβλημα. Παρακαλώ δοκιμάστε αργότερα'
+            ]);
+        }
     }
 
     private function userIsAdmin($userId)
     {
-//      Find the user
+//      Βρες τον χρήστη
         $user = User::find($userId);
 
-//      Return if user is admin
+//      Επιστροφή το πεδίο admin από τη βάση δεδομένων
         return $user->isAdmin();
     }
 }

@@ -3,9 +3,6 @@
 @section('title', 'Ανακοινώσεις')
 
 @section('content')
-    @if(isset($message))
-        {{$message}}
-    @endif
     <div class="container mt-5">
         <!-- Title -->
         <div class="row mt-5">
@@ -44,58 +41,29 @@
     </div>
 
 
-    <!-- Modal -->
+    <!-- Modal καταχώρηση νέας ανακοίνωσης -->
     <x-modal-import-announcement/>
 
-    <!-- Modal Confirm Delete -->
+    <!-- Modal επιβεβαίωσης διαγραφή ανακοίνωσης -->
     <x-modal-delete-announcement/>
 
     <!-- Scripts -->
     <script>
-        function openModal() {
-            document.getElementById('exampleModal').classList.add('show');
-            document.getElementById('exampleModal').style.display = 'block';
-            document.getElementById('exampleModal').style.background = '#2228';
-        }
-
-        function closeModal() {
-            document.getElementById('exampleModal').classList.remove('show');
-            document.getElementById('exampleModal').style.display = 'none';
-        }
-
-        // Show the modal if there are validation errors
-        @if ($errors->any())
-        openModal()
-        const buttons = document.getElementsByClassName('closeButton');
-
-        for (let i = 0; i < buttons.length; i++) {
-            buttons[i].addEventListener('click', (event) => {
-                event.preventDefault();
-                closeModal()
-            });
-        }
-        @endif
-
         @if(isset($admin) && $admin)
-        // Get the modal element
+        // Επιλέγουμε το αντικείμενο του Modal
         const confirmDeleteModal = document.getElementById('confirmDeleteModal');
 
-        // Attach an event listener to the modal show event
+        // Βάζουμε event όταν ανοίγει να τρέχει η παρακάτω συνάρτηση
         confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
-            // Get the button that triggered the modal
             const button = event.relatedTarget;
-
-            // Extract the announcement id from the data-announcement-id attribute
+            // Παίρνουμε το id της ανακοίνωσης
             const announcementId = button.getAttribute('data-announcement-id');
 
-            // Set the announcement id value in the hidden input field
+            // Βάζουμε το id της ανακοίνωσης στο κρυφό πεδίο
             const inputField = document.getElementById('announcement_id');
             inputField.value = announcementId;
-            console.log(document.getElementById('deleteAnnouncementForm'))
         });
         @endif
-
-
     </script>
 @endsection
 

@@ -38,26 +38,38 @@ class OfferController extends Controller
         // Fetch all offers if no filters are applied
         if (!$fuel && !$county) {
             $offers = Offer::orderBy('amount')->get();
+
+            $today = date('Y-m-d');
+            $todayOffers = Offer::where('expire_date', '>=', $today)->get();
+            $average = $todayOffers->avg('amount');
+            $greenOfferId = Offer::where('expire_date', '>=', $today)
+                ->where('amount', '<', $average)
+                ->orderBy('amount', 'desc')
+                ->value('id');
         } else {
             // Fetch offers based on input values
             $offers = Offer::when($fuel, function ($query, $fuel) {
-                                return $query->where('fuel_id', $fuel);
-                            })
-                            ->when($county, function ($query, $county) {
-                                return $query->where('county_id', $county);
-                            })
-                            ->orderBy('amount')
-                            ->get();
+                return $query->where('fuel_id', $fuel);
+            })
+                ->when($county, function ($query, $county) {
+                    return $query->where('county_id', $county);
+                })
+                ->orderBy('amount')
+                ->get();
+
+            $today = date('Y-m-d');
+            $todayOffers = Offer::where('fuel_id', $fuel)
+                ->where('expire_date', '>=', $today)
+                ->get();
+
+            $average = $todayOffers->avg('amount');
+
+            $greenOfferId = Offer::where('expire_date', '>=', $today)
+                ->where('amount', '<', $average)
+                ->where('fuel_id', $fuel)
+                ->orderBy('amount', 'desc')
+                ->value('id');
         }
-
-        $today = date('Y-m-d');
-        $averageAmount = Offer::where('expire_date', '>=', $today)
-            ->avg('amount');
-
-        $greenOfferId = Offer::where('expire_date', '>=', $today)
-            ->where('amount', '<', $averageAmount)
-            ->orderBy('amount', 'desc')
-            ->value('id');
 
         // Get form select data from DB
         $counties = County::getAllCounties();
@@ -89,10 +101,10 @@ class OfferController extends Controller
 
             $validated = $request->validated();
             if ($user->name !== $validated['name']) {
-                throw new \Exception('Το όνομα εταιρείας που πληκρολογήσατε δεν ανήκει στα στοιχεία της εγγραφής σας!');
+                throw new \Exception('Το όνομα εταιρείας που πληκτρολογήσατε δεν ανήκει στα στοιχεία της εγγραφής σας!');
             }
             if ($user->afm !== (int)$validated['afm']) {
-                throw new \Exception('Το ΑΦΜ που πληκτολογήσατε δεν ανήκει στα στοιχεία της εγγραφής σας!');
+                throw new \Exception('Το ΑΦΜ που πληκτρολογήσατε δεν ανήκει στα στοιχεία της εγγραφής σας!');
             }
 
             $previousOffer = Offer::where('afm', (int)$validated['afm'])
@@ -128,7 +140,7 @@ class OfferController extends Controller
 
             return redirect()->route('import')->with([
                 'type' => 'success',
-                'message' => "Η προσφορά σας για τύπο πετρελαίου $fuel->name, έχει καταχωτηθεί."
+                'message' => "Η προσφορά σας για τύπο πετρελαίου $fuel->name, έχει καταχτηθεί."
             ]);
         } catch (\Exception $e) {
             return redirect()->route('import')->with([

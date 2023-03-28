@@ -23,7 +23,44 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <a href="{{ route('home') }}" id="mobile-logo">
-            Logo
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="48" xmlns:xlink="http://www.w3.org/1999/xlink"
+                 viewBox="0 0 301.12 446.66">
+                <defs>
+                    <style>.cls-1 {
+                            fill: url(#linear-gradient);
+                        }
+
+                        .cls-2 {
+                            fill: url(#linear-gradient-2);
+                        }
+
+                        .cls-3 {
+                            fill: url(#linear-gradient-3);
+                        }</style>
+                    <linearGradient id="linear-gradient" x1="185.42" y1="283.24" x2="-1.84" y2="126.11"
+                                    gradientUnits="userSpaceOnUse">
+                        <stop offset="0" stop-color="#f6bc21"/>
+                        <stop offset="1" stop-color="#e00048"/>
+                    </linearGradient>
+                    <linearGradient id="linear-gradient-2" x1="274.78" y1="311.77" x2="101.99" y2="209.87"
+                                    gradientUnits="userSpaceOnUse">
+                        <stop offset="0.04" stop-color="#f6bc21"/>
+                        <stop offset="1" stop-color="#e00048"/>
+                    </linearGradient>
+                    <linearGradient id="linear-gradient-3" x1="305.3" y1="327.16" x2="174.16" y2="217.28"
+                                    xlink:href="#linear-gradient"/>
+                </defs>
+                <g id="Layer_2" data-name="Layer 2">
+                    <g id="objects">
+                        <path class="cls-1"
+                              d="M185,442.7A150.68,150.68,0,0,1,0,296.1C0,175.11,121.55,162.66,132.3,0A644.75,644.75,0,0,1,187,53.86c35.73,44.67-65.85,152.3-87.12,243.86C85.49,359.87,123.07,453.51,185,442.7Z"/>
+                        <path class="cls-2"
+                              d="M274.77,381.2a150.63,150.63,0,0,1-89.69,61.49H185c-61.93,10.81-109.79-44.56-92.76-145S222.77,98.53,187,53.86a570.71,570.71,0,0,1,39.77,49.35c11.33,18.29,19,28.41,14.89,71.64-4.44,47.06-24.85,95.18-44.31,136.46C175.53,357.68,237.58,434.83,274.77,381.2Z"/>
+                        <path class="cls-3"
+                              d="M301.12,296.1a149.79,149.79,0,0,1-26.26,85l-.09.13c-37.19,53.63-127.88,15.5-88-72.85,18.77-41.6,45.46-94.54,51.06-141.48,2.79-23.43.32-45.37-11-63.66C277.69,174.25,301.12,243.78,301.12,296.1Z"/>
+                    </g>
+                </g>
+            </svg>
         </a>
         <!-- Left Element -->
         <div class="collapse navbar-collapse">
