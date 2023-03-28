@@ -57,18 +57,20 @@ class OfferController extends Controller
                 ->orderBy('amount')
                 ->get();
 
-            $today = date('Y-m-d');
-            $todayOffers = Offer::where('fuel_id', $fuel)
-                ->where('expire_date', '>=', $today)
-                ->get();
+            if ($fuel) {
+                $today = date('Y-m-d');
+                $todayOffers = Offer::where('fuel_id', $fuel)
+                    ->where('expire_date', '>=', $today)
+                    ->get();
 
-            $average = $todayOffers->avg('amount');
+                $average = $todayOffers->avg('amount');
 
-            $greenOfferId = Offer::where('expire_date', '>=', $today)
-                ->where('amount', '<', $average)
-                ->where('fuel_id', $fuel)
-                ->orderBy('amount', 'desc')
-                ->value('id');
+                $greenOfferId = Offer::where('expire_date', '>=', $today)
+                    ->where('amount', '<', $average)
+                    ->where('fuel_id', $fuel)
+                    ->orderBy('amount', 'desc')
+                    ->value('id');
+            }
         }
 
         // Get form select data from DB
@@ -79,7 +81,7 @@ class OfferController extends Controller
             'counties' => $counties,
             'fuels' => $fuels,
             'offers' => $offers,
-            'greenOfferId' => $greenOfferId
+            'greenOfferId' => $greenOfferId ?? -1
         ];
 
 //      Return the view if the page with the data
