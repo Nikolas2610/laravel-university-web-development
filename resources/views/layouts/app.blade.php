@@ -113,10 +113,10 @@
     <div class="container">
         <div class="row">
             <div class="col-6 text-center">
-                <a href="http://" class="text-white text-decoration-blue">Όροι χρήσης</a>
+                <a href="{{ asset('pdf/term-of-use.pdf') }}" target="_blank" class="text-white text-decoration-blue">Όροι χρήσης</a>
             </div>
             <div class="col-6 text-center">
-                <a href="http://" class="text-white text-decoration-blue">Πολιτική Απορρήτου</a>
+                <a href="{{ asset('pdf/policies.pdf') }}" target="_blank" class="text-white text-decoration-blue">Πολιτική Απορρήτου</a>
             </div>
         </div>
     </div>
