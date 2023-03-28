@@ -39,6 +39,7 @@
                     <ul class="list-group">
                         @foreach($announcements as $announcement)
                             <x-home-anouncement-item date="{{$announcement->created_at}}"
+                                                     elementId="{{$announcement->id}}"
                                                      title="{{$announcement->title}}"/>
                         @endforeach
                     </ul>

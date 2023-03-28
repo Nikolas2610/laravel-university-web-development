@@ -37,7 +37,7 @@ class OfferController extends Controller
 
         // Fetch all offers if no filters are applied
         if (!$fuel && !$county) {
-            $offers = Offer::all();
+            $offers = Offer::orderBy('amount')->get();
         } else {
             // Fetch offers based on input values
             $offers = Offer::when($fuel, function ($query, $fuel) {
@@ -46,8 +46,28 @@ class OfferController extends Controller
                             ->when($county, function ($query, $county) {
                                 return $query->where('county_id', $county);
                             })
+                            ->orderBy('amount')
                             ->get();
         }
+
+        $today = date('Y-m-d');
+        $averageAmount = Offer::where('expire_date', '>=', $today)
+            ->avg('amount');
+
+        $greenOfferId = Offer::where('expire_date', '>=', $today)
+            ->where('amount', '<', $averageAmount)
+            ->orderBy('amount', 'desc')
+            ->value('id');
+
+//        $test = Offer::where('expire_date', '>=', $today);
+
+//        foreach ($test as $t) {
+//            echo '<pre>';
+//            var_dump($t->created_at);
+//            echo '</pre>';
+//        }
+
+
 
         // Get form select data from DB
         $counties = County::getAllCounties();
@@ -56,7 +76,8 @@ class OfferController extends Controller
         $data = [
             'counties' => $counties,
             'fuels' => $fuels,
-            'offers' => $offers
+            'offers' => $offers,
+            'greenOfferId' => $greenOfferId
         ];
 
 //      Return the view if the page with the data
