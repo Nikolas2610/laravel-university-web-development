@@ -26,6 +26,7 @@ class HomeController extends Controller
                 DB::raw('MAX(amount) as max_amount'),
                 DB::raw('MIN(amount) as min_amount'),
                 DB::raw('AVG(amount) as avg_amount'))
+            ->where('expire_date', '>', now()) // Filter out expired offers
             ->groupBy('offers.fuel_id', 'fuels.name')
             ->get();
         return $fuelStats;

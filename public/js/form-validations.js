@@ -1,70 +1,76 @@
+// onSubmit συνάρτηση της φόρμας εγγραφής
 function validateRegisterForm(event) {
     return validateForm(event, registerRules);
 }
 
+// onSubmit συνάρτηση της φόρμας σύνδεσης
 function validateLoginForm(event) {
     return validateForm(event, loginRules);
 }
 
+// onSubmit συνάρτηση της φόρμας καταχώρηση ανακοίνωσης
 function validateImportOfferForm(event) {
-    // return validateForm(event, offerRules);
-    return true;
+    return validateForm(event, offerRules);
 }
 
-// TODO: Fix that
+// onSubmit συνάρτηση της φόρμας καταχώρηση προσφοράς
 function validationImportAnnouncement(event) {
-    console.log(event)
-    event.preventDefault();
-    return false;
-    // validateForm(event, announcementRules);
+    return validateForm(event, announcementRules);
 }
 
+// Συνάρτηση για όλες τις φόρμες ώστε να πάρει τα δεδομένα από τη φόρμα
 function validateForm(event, rules) {
-    const form = event.target; // get the form element from the event object
-    const formData = new FormData(form); // create a FormData object from the form
-    formData.delete('_token');
+    const form = event.target; // Καταγραφή των δεδομένων από το event
+    const formData = new FormData(form);
+    formData.delete('_token');  // διαγραφή του csrf token από τον έλεγχο της φόρμας
 
-    const data = {}; // create an empty object to store the form data
+    // Αποθήκευση των δεδομένων της φόρμας σε αντικείμενο
+    const data = {};
     formData.forEach((value, key) => { // iterate over the FormData object
         data[key] = value; // add each form field to the data object
     });
-    console.log(data)
+
+    // Κλήση της συνάρτησης για έλεγχος σφαλμάτων
     const errors = validateObject(data, rules);
+
+    // Εμφάνιση των μηνυμάτων αποτυχίας στον χρήστη
     showErrors(data, errors);
 
+    // Αν είναι όλα καλώς στέλνει τη φόρμα στο backend αλλιώς επιστρέφει σφάλμα
     return Object.keys(errors).length === 0;
-    // return false
 }
 
+// Εμφάνιση των μηνυμάτων αποτυχίας στη φόρμα του χρήστη
 function showErrors(data, errors) {
-    // loop through the errors object
     for (let field in data) {
         if (errors.hasOwnProperty(field)) {
-            // get the error message for the field
+            // Καταγραφή του μηνύματος αποτυχίας
             const errorMessage = errors[field][0];
 
-            // create the id of the error element
+            // Προσθέτουμε το μήνυμα κάτω από το πεδίο που έχει το σφάλμα
             const errorId = `${field}-error`;
-
-            // get the error element
             const errorElement = document.getElementById(errorId);
-
-            // check if the error element exists
             if (errorElement) {
-                // populate the error message in the error element
                 errorElement.innerHTML = errorMessage || '';
             }
+
+            // Προσθέτουμε κόκκινο χρώμα στο πεδίο εισαγωγής
+            const inputElement = document.getElementById(field);
+            if (inputElement) {
+                inputElement.classList.add("is-invalid")
+            }
         } else {
-            // create the id of the error element
+            // Διαγραφή του μηνύματος αποτυχίας από το πεδίο εφόσον είναι έγκυρο
             const errorId = `${field}-error`;
-
-            // get the error element
             const errorElement = document.getElementById(errorId);
-
-            // check if the error element exists
             if (errorElement) {
-                // clear the error message from the error element
                 errorElement.innerHTML = '';
+            }
+
+            // Αφαιρούμε το κόκκινο χρώμα στο πεδίο εισαγωγής
+            const inputElement = document.getElementById(field);
+            if (inputElement) {
+                inputElement.classList.remove("is-invalid")
             }
         }
     }

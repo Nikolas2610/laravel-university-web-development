@@ -44,7 +44,7 @@
         <!-- No table Results messages -->
         @if(count($offers) === 0)
             <div class="mt-3">
-                <x-alert type="info" message="Δεν υπάρχει κάποια ανακοίνωση καραχωρημένη" />
+                <x-alert type="info" message="Δεν υπάρχει κάποια ανακοίνωση καραχωρημένη"/>
             </div>
         @else
             <div class="tableFixHead">
@@ -62,7 +62,8 @@
                     <!-- Table offers body -->
                     @foreach($offers as $index => $offer)
                         <x-offer-table-item index="{{$index}}" name="{{$offer->name}}" amount="{{$offer->amount}}"
-                                            fuel="{{$offer->fuel->name}}" address="{{$offer->address}}"/>
+                                            fuel="{{$offer->fuel->name}}" address="{{$offer->address}}"
+                                            elementId="{{$offer->id}}" greenId="{{$greenOfferId}}"/>
                     @endforeach
                     </tbody>
                 </table>

@@ -1,3 +1,4 @@
+// Κανόνες αντικειμένου της φόρμας της εγγραφής
 const registerRules = {
     name: {
         isRequired: true,
@@ -40,6 +41,7 @@ const registerRules = {
     },
 };
 
+// Κανόνες αντικειμένου της φόρμας της σύνδεσης
 const loginRules = {
     username: {
         isRequired: true,
@@ -49,6 +51,7 @@ const loginRules = {
     },
 }
 
+// Κανόνες αντικειμένου της φόρμας της δημιουργία ανακοίνωσης
 const announcementRules = {
     title: {
         isRequired: true,
@@ -58,6 +61,7 @@ const announcementRules = {
     }
 }
 
+// Κανόνες αντικειμένου της φόρμας της εισαγωγής προσφοράς
 const offerRules = {
     name: {
         isRequired: true,

@@ -56,7 +56,7 @@ class OfferSeeder extends Seeder
                             'municipality_id' => $municipality->id,
                             'county_id' => $county->id,
                             'fuel_id' => $fuel->id,
-                            'amount' => $faker->numberBetween(1, 3),
+                            'amount' => $faker->randomFloat(2, 1, 3),
                             'expire_date' => $faker->dateTimeBetween('+1 day', '+1 year')
                         ]);
                     }

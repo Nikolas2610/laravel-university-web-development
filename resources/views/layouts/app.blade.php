@@ -60,7 +60,7 @@
     </div>
 </nav>
 
-{{-- Alert Messages with return view --}}
+{{-- Alert Component for the user message --}}
 @if((isset($message) && isset($type)))
     <x-alert type="{{$type}}" message="{{$message}}"/>
 @endif

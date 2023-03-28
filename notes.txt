@@ -2,3 +2,11 @@
 2) create tables
 3) Add layouts
 4) Add Routes
+
+
+php artisan make:migration create_municipalities_table --create=municipalities
+php artisan make:migration create_counties_table --create=counties
+php artisan make:migration create_fuels_table --create=fuels
+php artisan make:migration create_users_table --create=users
+php artisan make:migration create_offers_table --create=offers
+php artisan make:migration create_announcements_table --create=announcements

@@ -7,7 +7,7 @@
                         aria-label="Close"></button>
             </div>
             <form action="{{ route('announcementImport') }}" method="post" id="announcementImportForm"
-                  onsubmit="return validationImportAnnouncement(event)}" novalidate>
+                  onsubmit="return validationImportAnnouncement(event)">
                 @csrf
                 <div class="modal-body">
                     <x-form-floating-input label="Τίτλος:" id="title" type="text"></x-form-floating-input>

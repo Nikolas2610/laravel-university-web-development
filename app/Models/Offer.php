@@ -26,7 +26,7 @@ class Offer extends Model
         'municipality_id' => 'integer',
         'county_id' => 'integer',
         'fuel_id' => 'integer',
-        'amount' => 'integer',
+        'amount' => 'float',
     ];
 
     public static function getAllOffers(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
