@@ -59,16 +59,6 @@ class OfferController extends Controller
             ->orderBy('amount', 'desc')
             ->value('id');
 
-//        $test = Offer::where('expire_date', '>=', $today);
-
-//        foreach ($test as $t) {
-//            echo '<pre>';
-//            var_dump($t->created_at);
-//            echo '</pre>';
-//        }
-
-
-
         // Get form select data from DB
         $counties = County::getAllCounties();
         $fuels = Fuel::getAllFuels();

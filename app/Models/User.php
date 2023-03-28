@@ -71,10 +71,10 @@ class User extends Authenticatable
 
 
         if (isset($userId)) {
-            //  Βρίσκουμε τον χρήστη στην βάση δεδομένων
+            //  Βρίσκουμε τον χρήστη στη βάση δεδομένων
             $user = User::find($userId);
 
-//          Αν ο χρήστης υπάρχει ενημερώνουμε την μεταβλητή και επιστρέφουμε true
+//          Αν ο χρήστης υπάρχει ενημερώνουμε τη μεταβλητή και επιστρέφουμε true
             if (isset($user->id)) {
                 self::$isUserLog = true;
                 return true;
