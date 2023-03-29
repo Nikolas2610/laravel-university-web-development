@@ -50,7 +50,7 @@
                 <x-form-input id="username" name="username" minlength="6"/>
             </x-register-row>
             <!-- Κωδικός -->
-            <x-register-row label="Κωδικός:" note="(Σημ: Αριθμός μέγιστο μήκος 9 ψηφία)" id="password">
+            <x-register-row label="Κωδικός:" note="(Σημ: Το ελάχιστο μήκος είναι 8 χαρακτήρες)" id="password">
                 <x-form-input id="password" name="password" type="password"/>
             </x-register-row>
             <!-- Επιβεβαίωση κωδικού -->

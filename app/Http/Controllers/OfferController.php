@@ -106,7 +106,7 @@ class OfferController extends Controller
                 throw new \Exception('Το όνομα εταιρείας που πληκτρολογήσατε δεν ανήκει στα στοιχεία της εγγραφής σας!');
             }
             if ($user->afm !== (int)$validated['afm']) {
-                throw new \Exception('Το ΑΦΜ που πληκτρολογήσατε δεν ανήκει στα στοιχεία της εγγραφής σας!');
+                throw new \Exception('Το ΑΦΜ που πληκτρολογήσατε δεν ανήκει στα στοιχεία της εγγραφής σας. Παρακαλώ επικοινωνήστε με το διαχειριστή (admin@plh23.com).');
             }
 
             $previousOffer = Offer::where('afm', (int)$validated['afm'])

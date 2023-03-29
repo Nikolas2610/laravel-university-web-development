@@ -33,7 +33,6 @@ const registerRules = {
     password: {
         isRequired: true,
         isStrongPassword: true,
-        isMaxLength: 9,
     },
     password_confirmation: {
         isRequired: true,
