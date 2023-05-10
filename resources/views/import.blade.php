@@ -19,15 +19,15 @@
             @csrf
             <!-- Επωνυμία Επιχείρησης -->
             <x-register-row label="Επωνυμία Επιχείρησης:" note="(Σημ: Μέγιστο μήκος 120 χαρακτήρες)" id="name">
-                <x-form-input id="name" name="name" maxlength="120"/>
+                <x-form-input id="name" name="name" maxlength="120" inputValue="{{ $user->username }}" disabled={{ true }} />
             </x-register-row>
             <!-- ΑΦΜ -->
             <x-register-row label="ΑΦΜ:" note="(Σημ: Αριθμός μέγιστο μήκος 9 ψηφία)" id="afm">
-                <x-form-input id="afm" name="afm" type="number" max="999999999" step="1"/>
+                <x-form-input id="afm" name="afm" type="number" max="999999999" step="1" inputValue="{{ $user->afm }}" disabled={{ true }} />
             </x-register-row>
             <!-- Διεύθυνση -->
             <x-register-row label="Διεύθυνση:" note="(Σημ: Μέγιστο μήκος 120 χαρακτήρες)" id="address">
-                <x-form-input id="address" name="address" maxlength="120"/>
+                <x-form-input id="address" name="address" maxlength="120" inputValue="{{ $user->address }}" disabled={{ true }} />
             </x-register-row>
             <!-- Δήμος -->
             <x-register-row label="Δήμος:" note="(Σημ: Επιλογή από λίστα)" id="municipality">

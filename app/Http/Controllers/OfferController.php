@@ -20,10 +20,15 @@ class OfferController extends Controller
         $municipalities = Municipality::getAllMunicipalities();
         $fuels = Fuel::getAllFuels();
 
+        // Get data for the form 
+        $id = session('user_id');
+        $user = User::find($id);
+
         $data = [
             'counties' => $counties,
             'municipality' => $municipalities,
-            'fuel' => $fuels
+            'fuel' => $fuels, 
+            'user' => $user
         ];
 
 //      Return the view if the page with the data
