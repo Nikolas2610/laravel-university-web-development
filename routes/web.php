@@ -4,6 +4,7 @@ use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OfferController;
+use App\Http\Controllers\XmlController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,4 +36,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/import', [OfferController::class, 'importPage'])->name('import');
     Route::post('/import', [OfferController::class, 'importOffer'])->name('import.offer');
+    Route::get('/download-xml', [XmlController::class, 'downloadXml'])->name('download-xml');
+    Route::get('/view-xml', [XmlController::class, 'viewXml'])->name('view-xml');
 });

@@ -1,0 +1,13 @@
+<!ELEMENT company (company_name, afm, location, offers)>
+<!ELEMENT company_name (#PCDATA)>
+<!ELEMENT afm (#PCDATA)>
+<!ELEMENT location (address, municipality, county)>
+<!ELEMENT address (#PCDATA)>
+<!ELEMENT municipality (#PCDATA)>
+<!ELEMENT county (#PCDATA)>
+<!ELEMENT offers (offer+)>
+<!ELEMENT offer (fuel, expire_date, amount, status)>
+<!ELEMENT fuel (#PCDATA)>
+<!ELEMENT expire_date (#PCDATA)>
+<!ELEMENT amount (#PCDATA)>
+<!ELEMENT status (#PCDATA)>

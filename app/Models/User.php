@@ -66,7 +66,7 @@ class User extends Authenticatable
 
     public static function isUserLog()
     {
-//      Παίρνουμε το ID του χρήστη από το session
+        //      Παίρνουμε το ID του χρήστη από το session
         $userId = session('user_id');
 
 
@@ -74,14 +74,14 @@ class User extends Authenticatable
             //  Βρίσκουμε τον χρήστη στη βάση δεδομένων
             $user = User::find($userId);
 
-//          Αν ο χρήστης υπάρχει ενημερώνουμε τη μεταβλητή και επιστρέφουμε true
+            //          Αν ο χρήστης υπάρχει ενημερώνουμε τη μεταβλητή και επιστρέφουμε true
             if (isset($user->id)) {
                 self::$isUserLog = true;
                 return true;
             }
         }
 
-//      Αν δεν υπάρχει επιστρέφουμε false
+        //      Αν δεν υπάρχει επιστρέφουμε false
         return false;
     }
 }
