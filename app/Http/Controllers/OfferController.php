@@ -27,11 +27,11 @@ class OfferController extends Controller
         $data = [
             'counties' => $counties,
             'municipality' => $municipalities,
-            'fuel' => $fuels, 
+            'fuel' => $fuels,
             'user' => $user
         ];
 
-//      Return the view if the page with the data
+        //      Return the view if the page with the data
         return view('import', $data);
     }
 
@@ -89,7 +89,7 @@ class OfferController extends Controller
             'greenOfferId' => $greenOfferId ?? -1
         ];
 
-//      Return the view if the page with the data
+        //      Return the view if the page with the data
         return view('search', $data);
     }
 
@@ -119,16 +119,39 @@ class OfferController extends Controller
                 ->first();
 
             if (isset($previousOffer->id)) {
-                $previousOffer->expire_date = $validated['expire_date'];
-                $previousOffer->amount = $validated['amount'];
-                $previousOffer->save();
+                if (strtotime($previousOffer->expire_date) < time()) {
+                    // Αν η προηγούμενη προσφορά έχει λήξη τότε δημιουργούμε νέα προσφορά
+                    Offer::create([
+                        'user_id' => $user->id,
+                        'name' => $validated['name'],
+                        'afm' => (int)$validated['afm'],
+                        'address' => $validated['address'],
+                        'municipality_id' => (int)$validated['municipality'],
+                        'county_id' => (int)$validated['county'],
+                        'fuel_id' => (int)$validated['fuel'],
+                        'amount' => $validated['amount'],
+                        'expire_date' => $validated['expire_date']
+                    ]);
 
-                $fuel = Fuel::find($previousOffer->fuel_id);
+                    $fuel = Fuel::find($validated['fuel']);
 
-                return redirect()->route('import')->with([
-                    'type' => 'success',
-                    'message' => "Η προσφορά σας για τύπο πετρελαίου $fuel->name, έχει ανανεωθεί."
-                ]);
+                    return redirect()->route('import')->with([
+                        'type' => 'success',
+                        'message' => "Η προηγούμενη προσφορά σας για τύπο πετρελαίου $fuel->name έχει λήξει. Έχει δημιουργηθεί νέα προσφορά."
+                    ]);
+                } else {
+                    // Αν η προηγούμενη προσφορά δεν έληξε τότε ενημερώνουμε την υφιστάμενη
+                    $previousOffer->expire_date = $validated['expire_date'];
+                    $previousOffer->amount = $validated['amount'];
+                    $previousOffer->save();
+
+                    $fuel = Fuel::find($previousOffer->fuel_id);
+
+                    return redirect()->route('import')->with([
+                        'type' => 'success',
+                        'message' => "Η προσφορά σας για τύπο πετρελαίου $fuel->name έχει ανανεωθεί."
+                    ]);
+                }
             }
 
             Offer::create([
